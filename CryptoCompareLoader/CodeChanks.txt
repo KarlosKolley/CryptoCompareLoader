@@ -1,0 +1,51 @@
+﻿//Dictionary<string, string>[] ccurData = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(jsonInput);
+            object ccurData = JsonConvert.DeserializeObject(jsonInput, Type.GetType("Newtonsoft.Json.Linq.JObject"));
+            Newtonsoft.Json.Linq.JObject retobj = (Newtonsoft.Json.Linq.JObject)ccurData;
+
+            string response = retobj.GetValue("Response").ToString();
+            string BaseLinkUrl = retobj.GetValue("BaseLinkUrl").ToString();
+            string coinlist = retobj.GetValue("Data").ToString();
+            //Dictionary<string, string>[] currCoinList = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(coinlist);
+            object allData = JsonConvert.DeserializeObject(coinlist, Type.GetType("Newtonsoft.Json.Linq.JObject"));
+            Newtonsoft.Json.Linq.JObject allDataQ = (Newtonsoft.Json.Linq.JObject)allData;
+            IEnumerable<ListData> aaa = allDataQ.Values<ListData>();
+
+            using (var sequenceEnum = aaa.GetEnumerator())
+            {
+                while (sequenceEnum.MoveNext())
+                {
+                    ListData nn = sequenceEnum.Current;
+                }
+            }
+            //foreach(var item in aaa)
+            //{
+            //    ListData any = (ListData)item;
+            //}
+            //IEnumerable coins = allDataQ.Values<List<>();
+            //ListData bb = aaa.First();
+            //JObject.
+            Newtonsoft.Json.Linq.JObject lst = Newtonsoft.Json.Linq.JObject.Parse(coinlist);
+            var items = lst.Children();
+            foreach(Newtonsoft.Json.Linq.JProperty item in items)
+            {
+                var it = item.ElementAt(0);
+            }
+
+            //CoinListHolder hold = JsonConvert.DeserializeObject<CoinListHolder>(jsonInput);
+
+			public class Rootobj
+        {
+            public Query query { get; set; }
+        }
+
+        public class Query
+        {
+            public Search[] search { get; set; }
+        }
+
+        public class Search
+        {
+            public int ns { get; set; }
+            public string title { get; set; }
+            public string snippet { get; set; }
+        }

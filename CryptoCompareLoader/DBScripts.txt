@@ -1,0 +1,27 @@
+﻿USE [CAPCOIN]
+GO
+
+/****** Object:  Table [dbo].[coincaplistcp]    Script Date: 11/16/2017 7:51:22 PM ******/
+DROP TABLE [dbo].[coincaplistcp]
+GO
+
+/****** Object:  Table [dbo].[coincaplistcp]    Script Date: 11/16/2017 7:51:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[coincaplistcp](
+	[loaddt] [int] NULL,
+	[loadtm] [int] NULL,
+	[coincompid] [int] NULL,
+	[coinid] [varchar](50) NULL,
+	[symbol] [varchar](50) NULL,
+	[algorythm] [varchar](50) NULL,
+	[prooftype] [varchar](50) NULL,
+	tsupply bigint,
+	[url] [varchar](150) NULL
+) ON [PRIMARY]
+
+GO

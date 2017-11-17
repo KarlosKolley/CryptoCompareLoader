@@ -1,0 +1,2 @@
+﻿https://github.com/KarlosKolley/CryptoCompareLoader
+https://github.com/KarlosKolley/CryptoCompareLoader.git
