@@ -34,7 +34,7 @@ namespace CryptoCompareLoader
 
             //** Get Json data
             string input = "https://min-api.cryptocompare.com/data/all/coinlist";
-            //string input = "https://www.cryptocompare.com/api/data/coinlist/";
+            //** string input = "https://www.cryptocompare.com/api/data/coinlist/";
             WebClient client = new WebClient();
 
             string jsonInput = string.Empty;
