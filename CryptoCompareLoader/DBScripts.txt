@@ -25,3 +25,76 @@ CREATE TABLE [dbo].[coincaplistcp](
 ) ON [PRIMARY]
 
 GO
+
+USE [CAPCOIN]
+GO
+
+/****** Object:  Table [dbo].[coincomplistprice]    Script Date: 11/20/2017 2:45:45 PM ******/
+DROP TABLE [dbo].[coincomplistprice]
+GO
+
+/****** Object:  Table [dbo].[coincomplistprice]    Script Date: 11/20/2017 2:45:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[coincomplistprice](
+	[loaddt] [int] NULL,
+	[loadtm] [int] NULL,
+	[id] [int] NULL,
+	[coinid] [varchar](50) NULL,
+	[symbol] [varchar](50) NULL,
+	[market] [varchar](50) NULL,
+	[open] [decimal](15, 8) NULL,
+	[high] [decimal](15, 8) NULL,
+	[low] [decimal](15, 8) NULL,
+	[open24] [decimal](15, 8) NULL,
+	[high24] [decimal](15, 8) NULL,
+	[low24] [decimal](15, 8) NULL,
+	[marketcap] [bigint] NULL,
+	[supply] [bigint] NULL,
+	[volume] [bigint] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [CAPCOIN]
+GO
+
+/****** Object:  Table [dbo].[coincompldescr]    Script Date: 11/20/2017 2:45:22 PM ******/
+DROP TABLE [dbo].[coincompldescr]
+GO
+
+/****** Object:  Table [dbo].[coincompldescr]    Script Date: 11/20/2017 2:45:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[coincompldescr](
+	[loaddt] [int] NULL,
+	[loadtm] [int] NULL,
+	[id] [int] NULL,
+	[coinid] [varchar](50) NULL,
+	[symbol] [varchar](50) NULL,
+	[icostatus] [varchar](30) NULL,
+	[coindescr] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
