@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using ADOW;
 using System.Collections;
+using System.Data;
 
 namespace CryptoCompareLoader
 {
@@ -12,7 +13,7 @@ namespace CryptoCompareLoader
         private SqlClientBuilder sqMain;
 
         private DBConnect() {
-            sqMain = new SqlClientBuilder(ConfigurationManager.AppSettings["conn"], false);
+            sqMain = new SqlClientBuilder(ConfigurationManager.AppSettings["conn"], true);
             if (sqMain.ErrNum > 0) {
                 intErr = sqMain.ErrNum;
                 strErr = sqMain.ErrMes;
@@ -47,6 +48,17 @@ namespace CryptoCompareLoader
             }
 
             return intErr;
+        }
+
+        public DataTable GetDataSQL(string sql)
+        {
+            DataTable dt = sqMain.GetDataSQL(sql, false);
+            if(sqMain.ErrNum > 0)
+            {
+                intErr = sqMain.ErrNum;
+                strErr = sqMain.ErrMes;
+            }
+            return dt;
         }
 
         public int ErrNum { get { return intErr; } }

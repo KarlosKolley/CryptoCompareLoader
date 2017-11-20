@@ -28,7 +28,7 @@ namespace CryptoCompareLoader
             DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             //DateTime dtDateTime = new DateTime(2017, 5, 6, 0, 0, 0, 0, System.DateTimeKind.Utc);
             DateTime dtDateTimeAdj = dtDateTime.AddSeconds(1500176348).ToLocalTime();
-            string strUpdt = GetStandardDt(dtDateTime);
+            string strUpdt = Util.GetStandardDt(dtDateTime);
 
             Logger log = Logger.Instance;
 
@@ -93,20 +93,6 @@ namespace CryptoCompareLoader
             log.WriteLog("Creating file and loading to database with " + intRecords.ToString() + " records", 0);
         }
 
-        static string GetStandardDt(DateTime dt)
-        {
-            string strYear = dt.Year.ToString();
-            string strMonth = "";
-            int intMonth = dt.Month;
-            if (intMonth < 10) strMonth = "0" + intMonth.ToString();
-            else strMonth = intMonth.ToString();
-            string strDay = "";
-            int intDay = dt.Day;
-            if (intDay < 10) strDay = "0" + intDay.ToString();
-            else strDay = intDay.ToString();
-            string strRetDate = strYear + "-" + strMonth + "-" + strDay;
-            return strRetDate;
-        }
     }
 
     //         "Id": "3808",

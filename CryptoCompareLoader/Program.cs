@@ -11,7 +11,7 @@ namespace CryptoCompareLoader
         static void Main(string[] args)
         {
             args = new string[1];
-            args[0] = "1";
+            args[0] = "3";
 
             Logger log = Logger.Instance;
             log.WriteHeader("COINCOMPARE LOG");
@@ -27,6 +27,18 @@ namespace CryptoCompareLoader
             if (args[0] == "1")
             {
                 InitialCoinList icl = new InitialCoinList();
+                icl.LoadData();
+            }
+
+            if (args[0] == "2")
+            {
+                PriceMultiLoader icl = new PriceMultiLoader();
+                icl.LoadData();
+            }
+
+            if (args[0] == "3")
+            {
+                CoinSnapshot icl = new CoinSnapshot();
                 icl.LoadData();
             }
 
