@@ -10,10 +10,13 @@ namespace CryptoCompareLoader
     {
         static void Main(string[] args)
         {
-            args = new string[1];
-            args[0] = "2";
+            //args = new string[1];
+            //args[0] = "2";
+            string oper = "";
+            if (args.Length == 0) oper = "1";
+            else oper = args[0];
 
-            Logger log = Logger.Instance;
+             Logger log = Logger.Instance;
             log.WriteHeader("COINCOMPARE LOG");
 
             DBConnect dconn = DBConnect.Instance;
@@ -24,19 +27,19 @@ namespace CryptoCompareLoader
                 return;
             }
 
-            if (args[0] == "1")
+            if (oper == "1")
             {
                 InitialCoinList icl = new InitialCoinList();
                 icl.LoadData();
             }
 
-            if (args[0] == "2")
+            if (oper == "2")
             {
                 PriceMultiLoader icl = new PriceMultiLoader();
                 icl.LoadData();
             }
 
-            if (args[0] == "3")
+            if (oper == "3")
             {
                 CoinSnapshot icl = new CoinSnapshot();
                 icl.LoadData();
