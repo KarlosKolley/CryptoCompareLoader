@@ -11,7 +11,7 @@ namespace CryptoCompareLoader
         static void Main(string[] args)
         {
             args = new string[1];
-            args[0] = "3";
+            args[0] = "2";
 
             Logger log = Logger.Instance;
             log.WriteHeader("COINCOMPARE LOG");
