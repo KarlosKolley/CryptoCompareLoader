@@ -47,6 +47,7 @@ namespace CryptoCompareLoader
             string strLine = "";
             string strDescr = "";
             string strIcoStatus = "";
+            string strFeatures = "";
             int flag = 0;
             int intRecords = 0;
 
@@ -76,15 +77,22 @@ namespace CryptoCompareLoader
                     return;
                 }
 
-                strDescr = GetDescription(jsonInput, out strIcoStatus, out flag);
+                strDescr = GetDescription(jsonInput, out strIcoStatus, out string features, out flag);
 
                 if(flag > 0)
                 {
                     log.WriteLog(strDescr, 2);
-                    return;
+                    continue;
                 }
 
-                strLine = strDt + DL + strTm + DL + id + DL + coinid + DL + strSymbol + DL + strIcoStatus + DL + strDescr + "\n";
+                strLine = strDt + DL + 
+                          strTm + DL + 
+                          id + DL + 
+                          coinid + DL + 
+                          strSymbol + DL + 
+                          strIcoStatus + DL + 
+                          strDescr + DL +
+                          features + "\n";
 
                 sb.Append(strLine);
                 intRecords++;
@@ -112,12 +120,14 @@ namespace CryptoCompareLoader
             log.WriteLog("End cycle " + DateTime.Now.ToLongTimeString(), 1);
         }
 
-        private string GetDescription(string input, out string icostatus, out int flag)
+        private string GetDescription(string input, out string icostatus, out string features, out int flag)
         {
             JObject allData = null;
             JObject retobject = null;
             string response = "";
-            string response2 = "";
+            string description = "";
+            icostatus = "";
+            features = "";
             flag = 0;
 
             try {allData = JObject.Parse(input); }
@@ -129,11 +139,12 @@ namespace CryptoCompareLoader
                 return response;
             }
 
-            icostatus = "";
             try { response = allData["Response"].ToString(); }
             catch (Exception ex)
             {
-                response = "0";
+                response = "Error reading Response // " + ex.Message;
+                flag = 1;
+                return response;
             }
 
             if(response.Equals("Success"))
@@ -141,23 +152,21 @@ namespace CryptoCompareLoader
                 retobject = JObject.Parse(
                 JObject.Parse(allData["Data"].ToString())["General"].ToString());
 
-                try{ response = retobject.GetValue("Description").ToString(); }
+                try{ description = retobject.GetValue("Description").ToString(); }
                 catch(Exception ex)
                 {
-                    response = "";
+                    description = "";
                 }
 
-                response = response.Replace("\r\n", "");
+                description = description.Replace("\r\n", "");
 
-                try { response2 = retobject.GetValue("Features").ToString(); }
+                try { features = retobject.GetValue("Features").ToString(); }
                 catch (Exception ex)
                 {
-                    response2 = "";
+                    features = "";
                 }
 
-                response2 = response2.Replace("\r\n", "");
-
-                response += response2;
+                features = features.Replace("\r\n", "");
 
                 retobject = JObject.Parse(
                 JObject.Parse(allData["Data"].ToString())["ICO"].ToString());
@@ -167,15 +176,9 @@ namespace CryptoCompareLoader
                 {
                     icostatus = "";
                 }
-
-                response += response2;
-            }
-            else if (response.Equals("0"))
-            {
-                response = "";
             }
 
-            return response;
+            return description;
         }
     }
 }
